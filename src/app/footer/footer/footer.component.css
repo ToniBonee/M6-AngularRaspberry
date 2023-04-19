@@ -1,0 +1,17 @@
+footer {
+    position: absolute;
+    margin-top: 8px;
+    padding-top: 20px;
+    background-color: blueviolet;
+    height: 75px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    width:100%;
+    margin-top:10%;
+    left: 0px;
+    border-top: solid black 3px;
+  }
+
+  
+ 

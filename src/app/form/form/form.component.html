@@ -1,0 +1,102 @@
+<div class="row form">
+
+    <h1>Formulario</h1>
+    <form [formGroup]="Form" (ngSubmit)="Clic(Form.value)">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Modelo</span>
+            </div>
+            <input type="text" class="form-control " #Modelo name="modelo" formControlName="modelo" ngModel
+                pattern="[0-9]*">
+        </div>
+        <div *ngIf="modelo.errors?.['pattern']" class="alert alert-danger">No puedes usar letras ni caracteres especiales</div>
+        <div *ngIf="modelo.errors?.['required']" class="alert alert-danger">El modelo es obligatorio</div>
+        <div *ngIf="modelo.errors?.['minlength']" class="alert alert-danger">Demasiado Corto</div>
+        <div *ngIf="modelo.errors?.['maxlength']" class="alert alert-danger">Demasiado Largo</div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Nombre del propietario</span>
+            </div>
+            <input type="text" class="form-control " #Nombre name="nombre" formControlName="nombre" ngModel
+                pattern="[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*">
+        </div>
+        <div *ngIf="nombre.errors?.['pattern']" class="alert alert-danger">No puedes usar numeros ni caracteres especiales</div>
+        <div *ngIf="nombre.errors?.['forbiddenName']" class="alert alert-danger">Ese nombre es inapropiado</div>
+        <div *ngIf="nombre.errors?.['required']" class="alert alert-danger">El nombre es obligatorio</div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Fecha deseada de entrega</span>
+            </div>
+            <input type="date" class="form-control " #Fecha name="fecha" formControlName="fecha">
+        </div>
+        <div *ngIf="fecha.invalid" class="alert alert-danger">Cuando querrias recibir el coche</div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="informacion" (click)="mostrarIn()"
+                formControlName="informacion">
+            <label>Quieres recibir informacion de mas productos ?</label>
+            <div *ngIf="informacion.valid">
+                <div class="input-group mb-3">
+                    <div class="input-group mb-3" *ngIf="mostrarEm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Email</span>
+                        </div>
+                        <input type="email" class="form-control prod1" #Email name="email" formControlName="email">
+                    </div>
+                </div>
+
+            </div>
+            <div *ngIf="email.errors?.['pattern']" class="alert alert-danger">Esto no es un correo</div>
+            <div *ngIf="email.errors?.['required']" class="alert alert-danger">El Email es obligatorio</div>
+            
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="personalizar" (click)="mostrarMat()"
+                formControlName="personalizar">
+            <label>Quieres personalizar tu matricula?</label>
+            <div *ngIf="personalizar.valid">
+
+                <div class="input-group mb-3" *ngIf="mostrarC">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Color de matricula </span>
+                    </div>
+                    <select class="form-control" formControlName="matricula" name="matricula">
+                        <option selected id="Blanco" value="Blanco">Blanco</option>
+                        <option id="Morado" value="Morado">Morado</option>
+                        <option id="Negro" value="Negro">Negro</option>
+                        <option id="Azul" value="Azul">Azul</option>
+                        <option id="Rojo" value="Rojo">Rojo</option>
+                    </select>
+                </div>
+                <div *ngIf="matricula.invalid" class="alert alert-danger">Elegir el color es obligatorio</div>
+
+                <div class="input-group mb-3" *ngIf="mostrarC">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Texto de la matricula</span>
+                    </div>
+                    <input type="text" class="form-control" name="matriculaText" formControlName="matriculaText">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Color del coche</span>
+            </div>
+            <input type="color" class="form-control " #Color name="color" formControlName="color">
+        </div>
+        <div *ngIf="color.invalid" class="alert alert-danger">Necesitas escoger un color para el coche</div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="politicas" formControlName="politicas">
+            <label>Aceptas nuestras politicas y que tus datos quedaran registrados en nuestra base de datos ?</label>
+            <div *ngIf="politicas.invalid" class="alert alert-danger">Es obligatorio aceptar nuestras politicas de
+                privacidad</div>
+        </div>
+        <br>
+        <button type="submit" [disabled]="Form.invalid">Enviar</button>
+    </form>
+</div>
